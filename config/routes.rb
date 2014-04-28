@@ -1,4 +1,10 @@
 ResourcingApp::Application.routes.draw do
+  resources :users
+
+  root  'static_pages#home'
+  match '/help',    to: 'static_pages#help',    via: 'get'
+  match '/utilisation',   to: 'static_pages#utilisation',   via: 'get'
+
   get "static_pages/home"
   get "static_pages/help"
   get "static_pages/utilisation"
