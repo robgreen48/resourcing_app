@@ -5,10 +5,14 @@ ResourcingApp::Application.routes.draw do
   root  'static_pages#home'
   match '/help',    to: 'static_pages#help',    via: 'get'
   match '/utilisation',   to: 'static_pages#utilisation',   via: 'get'
+  match '/recovery',   to: 'static_pages#recovery',   via: 'get'
+  match '/pacing',   to: 'static_pages#pacing',   via: 'get'
 
   get "static_pages/home"
   get "static_pages/help"
   get "static_pages/utilisation"
+  get "static_pages/recovery"
+  get "static_pages/pacing"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

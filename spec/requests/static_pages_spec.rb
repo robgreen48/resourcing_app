@@ -15,20 +15,20 @@ describe "Static pages" do
     end
   end
 
-  describe "Help page" do
+  describe "Recovery page" do
 
-    it "should have the content 'Help'" do
-      visit '/static_pages/help'
-      expect(page).to have_content('Help')
+    it "should have the content 'Recovery'" do
+      visit '/static_pages/recovery'
+      expect(page).to have_content('Recovery')
     end
 
-    it "should have the title 'Help'" do
-      visit '/static_pages/help'
-      expect(page).to have_title("ResourcingApp | Help")
+    it "should have the title 'Recovery'" do
+      visit '/static_pages/recovery'
+      expect(page).to have_title("ResourcingApp | Recovery")
     end
   end
 
-  describe "About page" do
+  describe "Utilisation page" do
 
     it "should have the content 'Utilisation'" do
       visit '/static_pages/utilisation'
@@ -40,4 +40,18 @@ describe "Static pages" do
       expect(page).to have_title("ResourcingApp | Utilisation")
     end
   end
+
+  describe "Pacing page" do
+
+    it "should have the content 'Pacing'" do
+      visit '/static_pages/pacing'
+      expect(page).to have_content('Pacing')
+    end
+
+    it "should have the title 'Pacing'" do
+      visit '/static_pages/pacing'
+      expect(page).to have_title("ResourcingApp | Pacing")
+    end
+  end
+
 end
