@@ -1,5 +1,6 @@
 ResourcingApp::Application.routes.draw do
   resources :users
+  resources :clients
 
   root  'static_pages#home'
   match '/help',    to: 'static_pages#help',    via: 'get'
