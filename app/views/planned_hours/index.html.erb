@@ -1,5 +1,9 @@
 <h1>Listing planned_hours</h1>
 
+<% @user.each do |user| %>
+
+<h2><%= user.name %></h2>
+
 <table>
   <thead>
     <tr>
@@ -15,18 +19,24 @@
 
   <tbody>
     <% @planned_hours.each do |planned_hour| %>
-      <tr>
-        <td><%= planned_hour.number %></td>
-        <td><%= planned_hour.client_id %></td>
-        <td><%= planned_hour.user_id %></td>
-        <td><%= planned_hour.month %></td>
-        <td><%= link_to 'Show', planned_hour %></td>
-        <td><%= link_to 'Edit', edit_planned_hour_path(planned_hour) %></td>
-        <td><%= link_to 'Destroy', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+      <% if planned_hour.user_id == user.id %>
+        <tr>
+          <td><%= planned_hour.number %></td>
+          <td><%= planned_hour.client_id %></td>
+          <td><%= planned_hour.user_id %></td>
+          <td><%= planned_hour.month %></td>
+          <td><%= link_to 'Show', planned_hour %></td>
+          <td><%= link_to 'Edit', edit_planned_hour_path(planned_hour) %></td>
+          <td><%= link_to 'Destroy', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      
     <% end %>
   </tbody>
 </table>
+
+<% end %>
 
 <br>
 

@@ -5,6 +5,7 @@ class PlannedHoursController < ApplicationController
   # GET /planned_hours.json
   def index
     @planned_hours = PlannedHour.all
+    @user = User.all
   end
 
   # GET /planned_hours/1
