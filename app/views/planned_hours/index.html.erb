@@ -1,0 +1,33 @@
+<h1>Listing planned_hours</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Client</th>
+      <th>User</th>
+      <th>Month</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @planned_hours.each do |planned_hour| %>
+      <tr>
+        <td><%= planned_hour.number %></td>
+        <td><%= planned_hour.client_id %></td>
+        <td><%= planned_hour.user_id %></td>
+        <td><%= planned_hour.month %></td>
+        <td><%= link_to 'Show', planned_hour %></td>
+        <td><%= link_to 'Edit', edit_planned_hour_path(planned_hour) %></td>
+        <td><%= link_to 'Destroy', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Planned hour', new_planned_hour_path %>

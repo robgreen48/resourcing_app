@@ -1,4 +1,6 @@
 ResourcingApp::Application.routes.draw do
+  resources :planned_hours
+
   resources :users
   resources :clients
 

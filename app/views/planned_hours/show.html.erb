@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @planned_hour.number %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @planned_hour.client_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @planned_hour.user_id %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @planned_hour.month %>
+</p>
+
+<%= link_to 'Edit', edit_planned_hour_path(@planned_hour) %> |
+<%= link_to 'Back', planned_hours_path %>
