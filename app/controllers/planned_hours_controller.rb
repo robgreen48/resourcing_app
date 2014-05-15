@@ -5,7 +5,9 @@ class PlannedHoursController < ApplicationController
   # GET /planned_hours.json
   def index
     @planned_hours = PlannedHour.all
+    @client = Client.all
     @user = User.all
+    @new_planned_hour = PlannedHour.new
   end
 
   # GET /planned_hours/1
@@ -29,7 +31,7 @@ class PlannedHoursController < ApplicationController
 
     respond_to do |format|
       if @planned_hour.save
-        format.html { redirect_to @planned_hour, notice: 'Planned hour was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'Planned hour was successfully created.' }
         format.json { render action: 'show', status: :created, location: @planned_hour }
       else
         format.html { render action: 'new' }

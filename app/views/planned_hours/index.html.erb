@@ -1,10 +1,13 @@
-<h1>Listing planned_hours</h1>
+<% provide(:title, 'Planned Hours') %>
+<% total_hours = 0 %>
 
-<% @user.each do |user| %>
+<h1>All Planned Hours - not by month!</h1>
 
-<h2><%= user.name %></h2>
+<% @client.each do |client| %>
 
-<table>
+<h2><%= client.name %></h2>
+
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Number</th>
@@ -20,21 +23,37 @@
   <tbody>
     <% @planned_hours.each do |planned_hour| %>
 
-      <% if planned_hour.user_id == user.id %>
+      <% if planned_hour.client_id == client.id %>
         <tr>
           <td><%= planned_hour.number %></td>
-          <td><%= planned_hour.client_id %></td>
-          <td><%= planned_hour.user_id %></td>
-          <td><%= planned_hour.month %></td>
+          <td><%= planned_hour.client.name %></td>
+          <td><%= planned_hour.user.name %></td>
+          <td><%= Date::MONTHNAMES[planned_hour.month.month] %></td>
           <td><%= link_to 'Show', planned_hour %></td>
           <td><%= link_to 'Edit', edit_planned_hour_path(planned_hour) %></td>
           <td><%= link_to 'Destroy', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
+
+        <% total_hours = total_hours + planned_hour.number %>
       <% end %>
       
     <% end %>
+
+    <tr class="info">
+      <td><strong><%= total_hours %></strong></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
   </tbody>
 </table>
+
+<% total_hours = 0 %>
+
+<%= render 'add_hours_form', :this_client => client.id  %>
 
 <% end %>
 

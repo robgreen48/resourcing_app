@@ -1,3 +1,74 @@
 <% provide(:title, 'Utilisation') %>
+
+<% total_hours = 0 %>
+
+<% d = Date.new(session[:month_view].year, session[:month_view].month) %>
+<% working_days = (d.at_beginning_of_month..d.at_end_of_month).count {|day| !day.saturday? && !day.sunday? } %>
+<% working_hours_in_month = working_days * 7.5 * 0.7%> <!-- 70% Utilisation -->
+
+<div id="month_view">
+<h3><%= Date::MONTHNAMES[session[:month_view].month] %>, <%= session[:month_view].year %></h3>
+<p data-no-turbolink><%= link_to '<< Previous Month', decrement_month_view_path %> | <%= link_to 'Next Month >>', increment_month_view_path %></p>
+</div>
+
 <h1>Utilisation</h1>
-<p>How much client work has been allocated to you, compared to the amount of time you have...</p>
+
+<% @user.each do |user| %>
+
+<h2><%= user.name %></h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Hours</th>
+      <th>Client</th>
+      <th>User</th>
+      <th>Month</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @planned_hours.each do |planned_hour| %>
+
+      <% if planned_hour.user_id == user.id %>
+        <tr>
+          <td><%= planned_hour.number %></td>
+          <td><%= planned_hour.client.name %></td>
+          <td><%= planned_hour.user.name %></td>
+          <td><%= Date::MONTHNAMES[planned_hour.month.month] %></td>
+          <td><%= link_to 'Show', planned_hour %></td>
+          <td><%= link_to 'Edit', edit_planned_hour_path(planned_hour) %></td>
+          <td><%= link_to 'Destroy', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% total_hours = total_hours + planned_hour.number %>
+      <% end %>
+      
+    <% end %>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Allocated Hours</th>
+      <th>Pro Rata%</th>
+      <th>Total Hours Available</th>
+      <th>Utilisation%</th>
+    </tr>
+  </thead>
+    <tr class="info">
+      <td><strong><%= total_hours %></strong></td>
+      <td><%= user.normal_hours %></td>
+      <td><% total_available_hours = (working_hours_in_month / 100) * user.normal_hours %><%= total_available_hours.round %></td>
+      <td><strong><% utilisation = total_hours / ((working_hours_in_month / 100 ) * user.normal_hours) * 100 %><%= utilisation.round %>%</strong></td>
+    </tr>
+     
+  </tbody>
+</table>
+
+<% total_hours = 0 %>
+
+<% end %>

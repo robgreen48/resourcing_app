@@ -1,6 +1,5 @@
 ResourcingApp::Application.routes.draw do
   resources :planned_hours
-
   resources :users
   resources :clients
 
@@ -9,6 +8,8 @@ ResourcingApp::Application.routes.draw do
   match '/utilisation',   to: 'static_pages#utilisation',   via: 'get'
   match '/recovery',   to: 'static_pages#recovery',   via: 'get'
   match '/pacing',   to: 'static_pages#pacing',   via: 'get'
+  match '/decrement_month_view', to: 'static_pages#decrement_month_view', via: 'get'
+  match '/increment_month_view', to: 'static_pages#increment_month_view', via: 'get'
 
   get "static_pages/home"
   get "static_pages/help"
