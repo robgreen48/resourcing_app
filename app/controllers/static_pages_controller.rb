@@ -8,9 +8,12 @@ class StaticPagesController < ApplicationController
   end
 
   def utilisation
-  	month_view2 = session[:month_view].strftime("%m")
-  	@planned_hours = PlannedHour.where("strftime('%m', month) + 0 = ?", month_view2.to_i)
-  	
+  	# month_view2 = session[:month_view].strftime("%m")
+  	# @planned_hours = PlannedHour.where("strftime('%m', month) + 0 = ?", month_view2.to_i)
+  	view = session[:month_view]
+    just_month = view.month
+    @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
+
     @user = User.all
 
   end
@@ -18,7 +21,7 @@ class StaticPagesController < ApplicationController
 
   def set_month_view
   	if session[:month_view] == nil
-  		session[:month_view] = DateTime.new(Time.now.year, Time.now.month, 1, 0, 0, 0, "00:00")
+  		session[:month_view] = DateTime.new(Time.now.year, Time.now.month, 1, 0, 0, 0, "+00:00")
   	end
   end
 
