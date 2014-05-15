@@ -18,7 +18,7 @@ class StaticPagesController < ApplicationController
 
   def set_month_view
   	if session[:month_view] == nil
-  		session[:month_view] = DateTime.new(Time.now.year, Time.now.month, 1, 0, 0, 0, "+00:00")
+  		session[:month_view] = DateTime.new(Time.now.year, Time.now.month, 1, 0, 0, 0, "00:00")
   	end
   end
 
