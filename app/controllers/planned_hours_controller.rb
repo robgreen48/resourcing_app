@@ -4,7 +4,8 @@ class PlannedHoursController < ApplicationController
   # GET /planned_hours
   # GET /planned_hours.json
   def index
-    @planned_hours = PlannedHour.all
+    view = session[:month_view]
+    @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
     @client = Client.all
     @user = User.all
     @new_planned_hour = PlannedHour.new

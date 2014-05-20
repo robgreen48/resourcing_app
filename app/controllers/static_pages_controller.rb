@@ -8,13 +8,50 @@ class StaticPagesController < ApplicationController
   end
 
   def utilisation
-  	# month_view2 = session[:month_view].strftime("%m")
-  	# @planned_hours = PlannedHour.where("strftime('%m', month) + 0 = ?", month_view2.to_i)
   	view = session[:month_view]
-    just_month = view.month
     @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
 
     @user = User.all
+
+  end
+
+  def utilisation_travel
+    view = session[:month_view]
+    @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
+
+    @user = User.where(:team => "Travel")
+
+  end
+
+  def utilisation_retail
+    view = session[:month_view]
+    @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
+
+    @user = User.where(:team => "Retail")
+
+  end
+
+  def utilisation_tech
+    view = session[:month_view]
+    @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
+
+    @user = User.where(:speciality => "Tech SEO")
+
+  end
+
+  def utilisation_cultivate
+    view = session[:month_view]
+    @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
+
+    @user = User.where(:speciality => "Cultivate")
+
+  end
+
+  def utilisation_ppc
+    view = session[:month_view]
+    @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
+
+    @user = User.where(:speciality => "PPC")
 
   end
 
@@ -26,13 +63,13 @@ class StaticPagesController < ApplicationController
   end
 
   def increment_month_view
-  session[:month_view] = session[:month_view] + 1.month
-  redirect_to utilisation_path
+    session[:month_view] = session[:month_view] + 1.month
+    redirect_to :back
   end
 
   def decrement_month_view 
-  session[:month_view] = session[:month_view] - 1.month
-  redirect_to utilisation_path
+    session[:month_view] = session[:month_view] - 1.month
+    redirect_to :back
   end
 
 end

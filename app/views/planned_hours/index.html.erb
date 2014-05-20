@@ -1,7 +1,13 @@
 <% provide(:title, 'Planned Hours') %>
 <% total_hours = 0 %>
 
-<h1>All Planned Hours - not by month!</h1>
+<div id="month_view">
+  <h3><%= Date::MONTHNAMES[session[:month_view].month] %>, <%= session[:month_view].year %></h3>
+  <p data-no-turbolink><%= link_to '<< Previous Month', decrement_month_view_path %> | <%= link_to 'Next Month >>', increment_month_view_path %></p>
+</div>
+
+<h1>All Planned Hours</h1>
+<div style="clear:both"></div>
 
 <% @client.each do |client| %>
 
@@ -10,11 +16,8 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Number</th>
-      <th>Client</th>
+      <th>Hours</th>
       <th>User</th>
-      <th>Month</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -26,12 +29,9 @@
       <% if planned_hour.client_id == client.id %>
         <tr>
           <td><%= planned_hour.number %></td>
-          <td><%= planned_hour.client.name %></td>
           <td><%= planned_hour.user.name %></td>
-          <td><%= Date::MONTHNAMES[planned_hour.month.month] %></td>
-          <td><%= link_to 'Show', planned_hour %></td>
           <td><%= link_to 'Edit', edit_planned_hour_path(planned_hour) %></td>
-          <td><%= link_to 'Destroy', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Delete', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
 
         <% total_hours = total_hours + planned_hour.number %>
@@ -39,14 +39,8 @@
       
     <% end %>
 
-    <tr class="info">
+    <tr>
       <td><strong><%= total_hours %></strong></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
     </tr>
   </tbody>
 </table>
@@ -56,7 +50,3 @@
 <%= render 'add_hours_form', :this_client => client.id  %>
 
 <% end %>
-
-<br>
-
-<%= link_to 'New Planned hour', new_planned_hour_path %>

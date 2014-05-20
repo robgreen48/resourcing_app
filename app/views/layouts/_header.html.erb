@@ -4,7 +4,19 @@
       <%= link_to "resourcing app", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Utilisation", utilisation_path %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Utilisation <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Everyone", utilisation_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Travel Team", utilisation_travel_path %></li>
+                <li><%= link_to "Retail Team", utilisation_retail_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Tech Team", utilisation_tech_path %></li>
+                <li><%= link_to "Cultivate Team", utilisation_cultivate_path %></li>
+                <li><%= link_to "PPC Team", utilisation_ppc_path %></li>
+              </ul>
+            </li>
           <li><%= link_to "Recovery", recovery_path %></li>
           <li><%= link_to "Pacing", pacing_path %></li>
         </ul>
