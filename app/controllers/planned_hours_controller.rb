@@ -7,7 +7,9 @@ class PlannedHoursController < ApplicationController
     view = session[:month_view]
     @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
     @client = Client.all
+    @client.sort_by! {|c| c.name}
     @user = User.all
+    @user.sort_by! {|u| u.name}
     @new_planned_hour = PlannedHour.new
   end
 

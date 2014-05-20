@@ -78,5 +78,9 @@
   
 </div>
 
+<div class="team_utilisation_summary">
 <h4 class="utilisation_summary">Team Summary</h4>
-<p>The tech team has <%= team_available_hours.round %> hours available, and <%= team_hours.round %> hours planned. The tech team is at <%= (team_hours / team_available_hours * 100).round %>% utilisation</p>
+<p>This team has <%= team_available_hours.round %> hours available, and <%= team_hours.round %> hours planned. This team is at <strong><%= (team_hours / team_available_hours * 100).round %>% utilisation</strong></p>
+</div>
+
+<div style="clear:both"></div>

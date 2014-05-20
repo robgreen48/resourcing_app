@@ -12,6 +12,7 @@ class StaticPagesController < ApplicationController
     @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
 
     @user = User.all
+    @user.sort_by! {|u| u.name}
 
   end
 
@@ -20,6 +21,7 @@ class StaticPagesController < ApplicationController
     @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
 
     @user = User.where(:team => "Travel")
+    @user.sort_by! {|u| u.name}
 
   end
 
@@ -28,6 +30,7 @@ class StaticPagesController < ApplicationController
     @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
 
     @user = User.where(:team => "Retail")
+    @user.sort_by! {|u| u.name}
 
   end
 
@@ -36,6 +39,7 @@ class StaticPagesController < ApplicationController
     @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
 
     @user = User.where(:speciality => "Tech SEO")
+    @user.sort_by! {|u| u.name}
 
   end
 
@@ -44,6 +48,7 @@ class StaticPagesController < ApplicationController
     @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
 
     @user = User.where(:speciality => "Cultivate")
+    @user.sort_by! {|u| u.name}
 
   end
 
@@ -52,6 +57,7 @@ class StaticPagesController < ApplicationController
     @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
 
     @user = User.where(:speciality => "PPC")
+    @user.sort_by! {|u| u.name}
 
   end
 

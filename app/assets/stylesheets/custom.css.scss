@@ -3,6 +3,11 @@
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
+$gray-darker: #222;
+$gray-dark: #333;
+$gray: #555;
+$gray-light: #999;
+$gray-lighter: #eee;
 
 /* universal */
 
@@ -48,7 +53,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $grayLight;
+  color: $gray-light;
 }
 
 p {
@@ -75,17 +80,23 @@ p {
   }
 }
 
+.navbar-inner{
+  ul li{
+  display: inline;
+  }
+}
+
 /* footer */
 
 footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
+  color: $gray-light;
   a {
     color: $gray;
     &:hover {
-      color: $grayDarker;
+      color: $gray-darker;
     }
   }
   small {

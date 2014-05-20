@@ -1,5 +1,6 @@
 <% provide(:title, 'Planned Hours') %>
 <% total_hours = 0 %>
+<% panel_num = 1 %>
 
 <div id="month_view">
   <h3><%= Date::MONTHNAMES[session[:month_view].month] %>, <%= session[:month_view].year %></h3>
@@ -9,44 +10,65 @@
 <h1>All Planned Hours</h1>
 <div style="clear:both"></div>
 
+<div class="panel-group" id="accordion">
+
 <% @client.each do |client| %>
 
-<h2><%= client.name %></h2>
+  <% @planned_hours.each do |planned_hour| %>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Hours</th>
-      <th>User</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @planned_hours.each do |planned_hour| %>
-
-      <% if planned_hour.client_id == client.id %>
-        <tr>
-          <td><%= planned_hour.number %></td>
-          <td><%= planned_hour.user.name %></td>
-          <td><%= link_to 'Edit', edit_planned_hour_path(planned_hour) %></td>
-          <td><%= link_to 'Delete', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-
-        <% total_hours = total_hours + planned_hour.number %>
-      <% end %>
-      
+    <% if planned_hour.client_id == client.id %>
+                  <% total_hours = total_hours + planned_hour.number %>
     <% end %>
+  <% end %>
 
-    <tr>
-      <td><strong><%= total_hours %></strong></td>
-    </tr>
-  </tbody>
-</table>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= panel_num %>">
+        <%= client.name %>: <%= total_hours %> Hours Planned
+        </a>
+      </h4>
+    </div>
 
-<% total_hours = 0 %>
+    <div id="collapse<%= panel_num %>" class="panel-collapse collapse">
+      <div class="panel-body">
 
-<%= render 'add_hours_form', :this_client => client.id  %>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Hours</th>
+              <th>User</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
 
-<% end %>
+          <tbody>
+            <% @planned_hours.each do |planned_hour| %>
+
+              <% if planned_hour.client_id == client.id %>
+                <tr>
+                  <td><%= planned_hour.number %></td>
+                  <td><%= planned_hour.user.name %></td>
+                  <td><%= link_to 'Edit', edit_planned_hour_path(planned_hour) %></td>
+                  <td><%= link_to 'Delete', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+              
+            <% end %>
+
+          </tbody>
+        </table>
+
+      <% total_hours = 0 %>
+
+      <%= render 'add_hours_form', :this_client => client.id  %>
+
+      </div>
+    </div>
+  </div>
+  <% panel_num = panel_num + 1 %>
+  <% end %>
+</div>
+
+<div style="clear:both"></div>
