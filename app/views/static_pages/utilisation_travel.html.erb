@@ -28,8 +28,8 @@
     <% end %>
 
     <% total_available_hours = (working_hours_in_month / 100) * user.normal_hours %>
-    <% utilisation = total_hours / ((working_hours_in_month / 100 ) * user.normal_hours) * 100 %>
-    <% team_available_hours = team_hours + total_available_hours %>
+    <% utilisation = total_hours / total_available_hours * 100 %>
+    <% team_available_hours = team_available_hours + total_available_hours %>
     <% team_hours = team_hours + total_hours %>
 
   <div class="panel panel-default">
