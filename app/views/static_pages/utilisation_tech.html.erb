@@ -9,13 +9,9 @@
 <% working_hours_in_month = working_days * 7.5 %>
 <% panel_num = 1 %>
 
-<div id="month_view">
-  <h3><%= Date::MONTHNAMES[session[:month_view].month] %>, <%= session[:month_view].year %></h3>
-  <p data-no-turbolink><%= link_to '<< Previous Month', decrement_month_view_path %> | <%= link_to 'Next Month >>', increment_month_view_path %></p>
-</div>
+<%= render 'month_view_panel' %>
 
 <h1>Utilisation - Tech SEO</h1>
-<div style="clear:both"></div>
 
 <div class="panel-group" id="accordion">
 
@@ -34,11 +30,16 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="<%= utilisation.round %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= utilisation.round %>%;">
+        <%= utilisation.round %>%
+        </div>
+      </div>
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= panel_num %>">
-          <%= user.name %>: <%= total_hours %> Hours - <strong><%= utilisation.round %>%</strong>
+          <%= user.name %>
         </a>
-      </h4>
+      </h4><div style="clear:both"></div>
     </div>
     <div id="collapse<%= panel_num %>" class="panel-collapse collapse">
       <div class="panel-body">

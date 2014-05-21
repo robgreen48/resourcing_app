@@ -2,13 +2,9 @@
 <% total_hours = 0 %>
 <% panel_num = 1 %>
 
-<div id="month_view">
-  <h3><%= Date::MONTHNAMES[session[:month_view].month] %>, <%= session[:month_view].year %></h3>
-  <p data-no-turbolink><%= link_to '<< Previous Month', decrement_month_view_path %> | <%= link_to 'Next Month >>', increment_month_view_path %></p>
-</div>
+<%= render 'static_pages/month_view_panel' %>
 
 <h1>All Planned Hours</h1>
-<div style="clear:both"></div>
 
 <div class="panel-group" id="accordion">
 

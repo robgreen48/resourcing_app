@@ -1,7 +1,12 @@
 #accordion{
-	width: 550px;
+	width: 630px;
 	float:left;
 	margin-top: 30px;
+
+	.panel-heading{
+		padding-bottom: 0px;
+		padding-top: 22px;
+	}
 }
 
 .utilisation_summary{
@@ -12,3 +17,9 @@
 	float: right;
 	width: 250px;
 }
+
+.progress{
+	width:400px;
+	float:right;
+}
+
