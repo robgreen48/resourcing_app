@@ -1,0 +1,27 @@
+<%= form_for(@new_holiday) do |f| %>
+  <% if @new_holiday.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@new_holiday.errors.count, "error") %> prohibited this holiday from being saved:</h2>
+
+      <ul>
+      <% @new_holiday.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :days_off %><br>
+    <%= f.number_field :days_off %>
+  </div>
+  <div class="form-group">
+    <%= f.collection_select :user_id, @user, :id, :name %>
+  </div>
+  <div class="form-group">
+    <%= f.hidden_field :month, :value => session[:month_view] %> 
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

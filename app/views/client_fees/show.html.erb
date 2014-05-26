@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fee:</strong>
+  <%= @client_fee.fee %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @client_fee.client_id %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @client_fee.month %>
+</p>
+
+<%= link_to 'Edit', edit_client_fee_path(@client_fee) %> |
+<%= link_to 'Back', client_fees_path %>

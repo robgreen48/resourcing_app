@@ -1,6 +1,7 @@
 <% provide(:title, 'Utilisation') %>
 
 <% total_hours = 0 %>
+<% days_off = 0 %>
 
 <% d = Date.new(session[:month_view].year, session[:month_view].month) %>
 <% working_days = (d.at_beginning_of_month..d.at_end_of_month).count {|day| !day.saturday? && !day.sunday? } %>
@@ -21,8 +22,14 @@
       <% end %>
     <% end %>
 
-    <% total_available_hours = (working_hours_in_month / 100) * user.normal_hours %>
-    <% utilisation = total_hours / ((working_hours_in_month / 100 ) * user.normal_hours) * 100 %>
+    <% @holidays.each do |holiday| %>
+      <% if holiday.user_id == user.id %>
+          <% days_off = days_off + holiday.days_off %>
+      <% end %>
+    <% end %>
+
+    <% total_available_hours = ( (working_hours_in_month / 100) * user.normal_hours ) - ( days_off * 7.5 ) %>
+    <% utilisation = total_hours / total_available_hours * 100 %>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -69,6 +76,7 @@
   </div>
 
   <% total_hours = 0 %>
+  <% days_off = 0 %>
   <% panel_num = panel_num + 1 %>
 
   <% end %>

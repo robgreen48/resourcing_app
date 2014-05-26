@@ -1,0 +1,31 @@
+<% provide(:title, 'Holidays') %>
+
+<%= render 'static_pages/month_view_panel' %>
+
+<h1>Manage Holidays</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Days off</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @holidays.each do |holiday| %>
+      <tr>
+        <td><%= holiday.user.name %></td>
+        <td><%= holiday.days_off %></td>
+        <td><%= link_to 'Delete', holiday, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= render 'form' %>
+
+<div style="clear:both"></div>

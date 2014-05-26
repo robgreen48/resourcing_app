@@ -1,0 +1,35 @@
+<%= render 'static_pages/month_view_panel' %>
+
+<h1>Client Fees</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Fee</th>
+      <th>Month</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @client_fees.each do |client_fee| %>
+      <tr>
+        <td><%= client_fee.client.name %></td>
+        <td><%= number_to_currency(client_fee.fee, unit: "£") %></td>
+        <td><%= client_fee.month %></td>
+        <td><%= link_to 'Show', client_fee %></td>
+        <td><%= link_to 'Edit', edit_client_fee_path(client_fee) %></td>
+        <td><%= link_to 'Destroy', client_fee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Client fee', new_client_fee_path %>
+
+<div style="clear:both"></div>

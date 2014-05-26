@@ -14,6 +14,8 @@ class StaticPagesController < ApplicationController
     @user = User.all
     @user.sort_by! {|u| u.name}
 
+    @holidays = Holiday.where(:month => view.beginning_of_day..view.end_of_day)
+
   end
 
   def utilisation_travel

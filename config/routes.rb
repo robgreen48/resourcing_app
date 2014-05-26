@@ -1,4 +1,8 @@
 ResourcingApp::Application.routes.draw do
+  resources :holidays
+
+  resources :client_fees
+
   resources :planned_hours
   resources :users
   resources :clients

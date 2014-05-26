@@ -1,0 +1,29 @@
+<%= form_for(@client_fee) do |f| %>
+  <% if @client_fee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@client_fee.errors.count, "error") %> prohibited this client_fee from being saved:</h2>
+
+      <ul>
+      <% @client_fee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fee %><br>
+    <%= f.number_field :fee %>
+  </div>
+  <div class="field">
+    <%= f.label :client_id %><br>
+    <%= f.number_field :client_id %>
+  </div>
+  <div class="field">
+    <%= f.label :month %><br>
+    <%= f.text_field :month %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

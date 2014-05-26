@@ -8,6 +8,7 @@
       <th>Email</th>
       <th>Team</th>
       <th>Account director</th>
+      <th>Day Rate</th>
       <th></th>
       <th></th>
       <th></th>
@@ -21,6 +22,7 @@
         <td><%= client.email %></td>
         <td><%= client.team %></td>
         <td><%= client.account_director %></td>
+        <td><%= client.day_rate %></td>
         <td><%= link_to 'Show', client %></td>
         <td><%= link_to 'Edit', edit_client_path(client) %></td>
         <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>

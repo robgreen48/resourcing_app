@@ -11,13 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140507134217) do
+ActiveRecord::Schema.define(version: 20140526131246) do
+
+  create_table "client_fees", force: true do |t|
+    t.integer  "fee"
+    t.integer  "client_id"
+    t.datetime "month"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "clients", force: true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "team"
     t.integer  "account_director"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "day_rate",         default: 950
+  end
+
+  create_table "holidays", force: true do |t|
+    t.integer  "days_off"
+    t.integer  "user_id"
+    t.datetime "month"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
