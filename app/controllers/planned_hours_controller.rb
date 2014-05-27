@@ -12,6 +12,7 @@ class PlannedHoursController < ApplicationController
     @user = User.all
     @user.sort_by! {|u| u.name}
     @new_planned_hour = PlannedHour.new
+    @client_fees = ClientFee.where(:month => view.beginning_of_day..view.end_of_day)
   end
 
   # GET /planned_hours/1

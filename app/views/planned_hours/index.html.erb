@@ -1,10 +1,11 @@
 <% provide(:title, 'Planned Hours') %>
 <% total_hours = 0 %>
 <% panel_num = 1 %>
+<% retainer = 0 %>
 
 <%= render 'static_pages/month_view_panel' %>
 
-<h1>All Planned Hours</h1>
+<h1>Plan Hours</h1>
 
 <div class="panel-group" id="accordion">
 
@@ -17,11 +18,20 @@
     <% end %>
   <% end %>
 
+  <% @client_fees.each do |client_fee| %>
+
+    <% if client_fee.client_id == client.id %>
+                  <% retainer = retainer + client_fee.fee %>
+    <% end %>
+  <% end %>
+
+  <% paid_for_hours = retainer / client.day_rate * 7.5 %>
+
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title">
+      <h4 class="panel-title" id="planned_hours_heading">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= panel_num %>">
-        <%= client.name %>: <%= total_hours %> Hours Planned
+        <%= client.name %>: <%= total_hours %> hours planned, out of <%= paid_for_hours .round %> paid for
         </a>
       </h4>
     </div>
@@ -29,34 +39,10 @@
     <div id="collapse<%= panel_num %>" class="panel-collapse collapse">
       <div class="panel-body">
 
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Hours</th>
-              <th>User</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @planned_hours.each do |planned_hour| %>
-
-              <% if planned_hour.client_id == client.id %>
-                <tr>
-                  <td><%= planned_hour.number %></td>
-                  <td><%= planned_hour.user.name %></td>
-                  <td><%= link_to 'Edit', edit_planned_hour_path(planned_hour) %></td>
-                  <td><%= link_to 'Delete', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                </tr>
-              <% end %>
-              
-            <% end %>
-
-          </tbody>
-        </table>
+        <%= render 'planned_hours_breakdown', :this_client => client.id %>
 
       <% total_hours = 0 %>
+      <% retainer = 0 %>
 
       <%= render 'add_hours_form', :this_client => client.id  %>
 

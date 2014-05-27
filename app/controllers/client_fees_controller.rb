@@ -9,6 +9,7 @@ class ClientFeesController < ApplicationController
     @client_fees = ClientFee.where(:month => view.beginning_of_day..view.end_of_day)
     @client = Client.all
     @client.sort_by! {|c| c.name}
+    @new_client_fee = ClientFee.new
   end
 
   # GET /client_fees/1
@@ -34,7 +35,7 @@ class ClientFeesController < ApplicationController
 
     respond_to do |format|
       if @client_fee.save
-        format.html { redirect_to @client_fee, notice: 'Client fee was successfully created.' }
+        format.html { redirect_to client_fees_path, notice: 'Client fee was successfully created.' }
         format.json { render action: 'show', status: :created, location: @client_fee }
       else
         format.html { render action: 'new' }
@@ -48,7 +49,7 @@ class ClientFeesController < ApplicationController
   def update
     respond_to do |format|
       if @client_fee.update(client_fee_params)
-        format.html { redirect_to @client_fee, notice: 'Client fee was successfully updated.' }
+        format.html { redirect_to client_fees_path, notice: 'Client fee was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

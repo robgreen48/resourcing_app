@@ -1,35 +1,34 @@
 <%= render 'static_pages/month_view_panel' %>
 
 <h1>Client Fees</h1>
+<div class="client_fees_container">
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Client</th>
-      <th>Fee</th>
-      <th>Month</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @client_fees.each do |client_fee| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= client_fee.client.name %></td>
-        <td><%= number_to_currency(client_fee.fee, unit: "£") %></td>
-        <td><%= client_fee.month %></td>
-        <td><%= link_to 'Show', client_fee %></td>
-        <td><%= link_to 'Edit', edit_client_fee_path(client_fee) %></td>
-        <td><%= link_to 'Destroy', client_fee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Client</th>
+        <th>Fee</th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @client_fees.each do |client_fee| %>
+        <tr>
+          <td><%= client_fee.client.name %></td>
+          <td><%= number_to_currency(client_fee.fee, unit: "£") %></td>
+          <td><%= link_to 'Edit', edit_client_fee_path(client_fee) %></td>
+          <td><%= link_to 'Delete', client_fee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Client fee', new_client_fee_path %>
+  <br>
+
+  <%= render 'add_client_fees_form' %>
+
+</div>
 
 <div style="clear:both"></div>
