@@ -1,7 +1,6 @@
 <% provide(:title, 'Planned Hours') %>
-<% total_hours = 0 %>
+
 <% panel_num = 1 %>
-<% retainer = 0 %>
 
 <%= render 'static_pages/month_view_panel' %>
 
@@ -11,43 +10,24 @@
 
 <% @client.each do |client| %>
 
-  <% @planned_hours.each do |planned_hour| %>
-
-    <% if planned_hour.client_id == client.id %>
-                  <% total_hours = total_hours + planned_hour.number %>
-    <% end %>
-  <% end %>
-
-  <% @client_fees.each do |client_fee| %>
-
-    <% if client_fee.client_id == client.id %>
-                  <% retainer = retainer + client_fee.fee %>
-    <% end %>
-  <% end %>
-
-  <% paid_for_hours = retainer / client.day_rate * 7.5 %>
-
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title" id="planned_hours_heading">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= panel_num %>">
-        <%= client.name %>: <%= total_hours %> hours planned, out of <%= paid_for_hours .round %> paid for
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= panel_num %>" id="planned_hours_summary-<%= client.id %>">
+        <%= client.name %>: <%= client.total_planned_hours(@view) %> hours planned, out of <%= client.paid_for_hours(@view).round %> paid for
         </a>
       </h4>
     </div>
 
     <div id="collapse<%= panel_num %>" class="panel-collapse collapse">
-      <div class="panel-body">
+      <div class="panel-body" id="panel-info-<%= client.id %>">
 
         <%= render 'planned_hours_breakdown', :this_client => client.id %>
 
-      <% total_hours = 0 %>
-      <% retainer = 0 %>
+      </div>
 
       <%= render 'add_hours_form', :this_client => client.id  %>
-
-
-      </div>
+      
     </div>
   </div>
   <% panel_num = panel_num + 1 %>

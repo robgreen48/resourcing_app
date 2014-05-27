@@ -5,14 +5,14 @@ class PlannedHoursController < ApplicationController
   # GET /planned_hours
   # GET /planned_hours.json
   def index
-    view = session[:month_view]
-    @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day)
+    @view = session[:month_view]
+    @planned_hours = PlannedHour.where(:month => @view.beginning_of_day..@view.end_of_day)
     @client = Client.all
     @client.sort_by! {|c| c.name}
     @user = User.all
     @user.sort_by! {|u| u.name}
     @new_planned_hour = PlannedHour.new
-    @client_fees = ClientFee.where(:month => view.beginning_of_day..view.end_of_day)
+    @client_fees = ClientFee.where(:month => @view.beginning_of_day..@view.end_of_day)
   end
 
   # GET /planned_hours/1
@@ -36,6 +36,7 @@ class PlannedHoursController < ApplicationController
 
     respond_to do |format|
       if @planned_hour.save
+        format.js
         format.html { redirect_to action: "index", notice: 'Planned hour was successfully created.' }
         format.json { render action: 'show', status: :created, location: @planned_hour }
       else
