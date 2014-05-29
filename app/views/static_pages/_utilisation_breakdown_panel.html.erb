@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="<%= user.calc_utilisation(@view).round %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= user.calc_utilisation(@view).round %>%;">
+      <%= user.calc_utilisation(@view).round %>%
+      </div>
+    </div>
+    <h4 class="panel-title">
+      <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= panel_num %>">
+        <%= user.name %>
+      </a>
+    </h4><div style="clear:both"></div>
+  </div>
+  <div id="collapse<%= panel_num %>" class="panel-collapse collapse">
+    <div class="panel-body">
+
+      <table id="utilisation_breakdown" class="table table-striped table-condensed">
+        <thead>
+          <tr>
+             <th>Client</th>
+             <th>Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @planned_hours.each do |planned_hour| %>
+            <% if planned_hour.user_id == user.id %>
+              <tr>
+                <td><%= planned_hour.client.name %></td>
+                <td><%= planned_hour.number %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <small><%= user.total_hours(@view) %> hours planned out of <%= user.total_available_hours(@view).round %> hours available. <%= user.days_off(@view) %> days off in <%= Date::MONTHNAMES[@view.month] %>.</small>
+    </div>
+  </div>
+</div>
+
+<% panel_num = panel_num + 1 %>

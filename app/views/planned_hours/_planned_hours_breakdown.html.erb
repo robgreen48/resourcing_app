@@ -4,7 +4,6 @@
       <th>User</th>
       <th>Hours</th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -15,8 +14,7 @@
         <tr>
           <td><%= planned_hour.user.name %></td>
           <td><%= planned_hour.number %></td>
-          <td><%= link_to 'Edit', edit_planned_hour_path(planned_hour) %></td>
-          <td><%= link_to 'Delete', planned_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Delete', planned_hour, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true %></td>
         </tr>
       <% end %>
       

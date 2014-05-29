@@ -5,8 +5,8 @@ class ClientFeesController < ApplicationController
   # GET /client_fees
   # GET /client_fees.json
   def index
-    view = session[:month_view]
-    @client_fees = ClientFee.where(:month => view.beginning_of_day..view.end_of_day)
+    @view = session[:month_view]
+    @client_fees = ClientFee.where(:month => @view.beginning_of_day..@view.end_of_day)
     @client = Client.all
     @client.sort_by! {|c| c.name}
     @new_client_fee = ClientFee.new

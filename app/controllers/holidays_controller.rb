@@ -5,8 +5,8 @@ class HolidaysController < ApplicationController
   # GET /holidays
   # GET /holidays.json
   def index
-    view = session[:month_view]
-    @holidays = Holiday.where(:month => view.beginning_of_day..view.end_of_day)
+    @view = session[:month_view]
+    @holidays = Holiday.where(:month => @view.beginning_of_day..@view.end_of_day)
     @new_holiday = Holiday.new
     @user = User.all
     @user.sort_by! {|u| u.name}

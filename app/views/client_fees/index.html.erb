@@ -1,6 +1,8 @@
+<% provide(:title, 'Client Fees') %>
+
 <%= render 'static_pages/month_view_panel' %>
 
-<h1>Client Fees</h1>
+<h1>Client Fees - <%= Date::MONTHNAMES[@view.month] %></h1>
 <div class="client_fees_container">
 
   <table class="table table-striped">
@@ -8,7 +10,6 @@
       <tr>
         <th>Client</th>
         <th>Fee</th>
-        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -18,7 +19,6 @@
         <tr>
           <td><%= client_fee.client.name %></td>
           <td><%= number_to_currency(client_fee.fee, unit: "£") %></td>
-          <td><%= link_to 'Edit', edit_client_fee_path(client_fee) %></td>
           <td><%= link_to 'Delete', client_fee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>

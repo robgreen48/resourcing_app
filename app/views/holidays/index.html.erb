@@ -2,30 +2,33 @@
 
 <%= render 'static_pages/month_view_panel' %>
 
-<h1>Manage Holidays</h1>
+<h1>Manage Holidays - <%= Date::MONTHNAMES[@view.month] %></h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Days off</th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="holidays_container">
 
-  <tbody>
-    <% @holidays.each do |holiday| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= holiday.user.name %></td>
-        <td><%= holiday.days_off %></td>
-        <td><%= link_to 'Delete', holiday, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>User</th>
+        <th>Days off</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @holidays.each do |holiday| %>
+        <tr>
+          <td><%= holiday.user.name %></td>
+          <td><%= holiday.days_off %></td>
+          <td><%= link_to 'Delete', holiday, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
 
 <%= render 'form' %>
+</div>
 
 <div style="clear:both"></div>

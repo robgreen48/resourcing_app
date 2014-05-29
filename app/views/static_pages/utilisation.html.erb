@@ -1,11 +1,5 @@
 <% provide(:title, 'Utilisation') %>
 
-<% total_hours = 0 %>
-<% days_off = 0 %>
-
-<% d = Date.new(session[:month_view].year, session[:month_view].month) %>
-<% working_days = (d.at_beginning_of_month..d.at_end_of_month).count {|day| !day.saturday? && !day.sunday? } %>
-<% working_hours_in_month = working_days * 7.5 %>
 <% panel_num = 1 %>
 
 <%= render 'month_view_panel' %>
@@ -16,63 +10,7 @@
 
   <% @user.each do |user| %>
 
-    <% @planned_hours.each do |planned_hour| %>
-      <% if planned_hour.user_id == user.id %>
-          <% total_hours = total_hours + planned_hour.number %>
-      <% end %>
-    <% end %>
-
-    <% @holidays.each do |holiday| %>
-      <% if holiday.user_id == user.id %>
-          <% days_off = days_off + holiday.days_off %>
-      <% end %>
-    <% end %>
-
-    <% total_available_hours = ( (working_hours_in_month / 100) * user.normal_hours ) - ( days_off * 7.5 ) %>
-    <% utilisation = total_hours / total_available_hours * 100 %>
-
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="<%= utilisation.round %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= utilisation.round %>%;">
-        <%= utilisation.round %>%
-        </div>
-      </div>
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= panel_num %>">
-          <%= user.name %>
-        </a>
-      </h4><div style="clear:both"></div>
-    </div>
-    <div id="collapse<%= panel_num %>" class="panel-collapse collapse">
-      <div class="panel-body">
-
-        <table id="utilisation_breakdown" class="table table-striped table-condensed">
-          <thead>
-            <tr>
-               <th>Client</th>
-               <th>Hours</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @planned_hours.each do |planned_hour| %>
-              <% if planned_hour.user_id == user.id %>
-                <tr>
-                  <td><%= planned_hour.client.name %></td>
-                  <td><%= planned_hour.number %></td>
-                </tr>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-        <small><%= total_hours %> hours planned out of <%= total_available_hours.round %> hours available. <%= days_off %> days off in <%= Date::MONTHNAMES[session[:month_view].month] %>.</small>
-      </div>
-    </div>
-  </div>
-
-  <% total_hours = 0 %>
-  <% days_off = 0 %>
-  <% panel_num = panel_num + 1 %>
+    <%= render 'utilisation_breakdown_panel', :user => user, :panel_num => panel_num %>
 
   <% end %>
   
