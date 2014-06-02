@@ -1,4 +1,4 @@
 <div class="panel panel-default" id="month_view">
-  <div class="panel-heading"><h3><%= Date::MONTHNAMES[session[:month_view].month] %>, <%= session[:month_view].year %></h3></div>
+  <div class="panel-heading"><h3><%= Date::MONTHNAMES[@view.month] %>, <%= @view.year %></h3></div>
   <div class="panel-body"><p data-no-turbolink><%= link_to '<< Previous Month', decrement_month_view_path %> | <%= link_to 'Next Month >>', increment_month_view_path %></p></div>
 </div>

@@ -1,5 +1,4 @@
 class StaticPagesController < ApplicationController
-  before_action :set_month_view
 
   def home
   end
@@ -60,22 +59,6 @@ class StaticPagesController < ApplicationController
 
     @user = User.where(:speciality => "PPC")
     @user.sort_by! {|u| u.name}
-  end
-
-  def set_month_view
-  	if session[:month_view] == nil
-  		session[:month_view] = DateTime.new(Time.now.year, Time.now.month, 1, 0, 0, 0, "+00:00")
-  	end
-  end
-
-  def increment_month_view
-    session[:month_view] = session[:month_view] + 1.month
-    redirect_to :back
-  end
-
-  def decrement_month_view 
-    session[:month_view] = session[:month_view] - 1.month
-    redirect_to :back
   end
 
 end

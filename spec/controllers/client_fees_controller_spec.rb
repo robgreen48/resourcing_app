@@ -30,13 +30,13 @@ describe ClientFeesController do
   # ClientFeesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all client_fees as @client_fees" do
-      client_fee = ClientFee.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:client_fees).should eq([client_fee])
-    end
-  end
+  # describe "GET index" do
+  #   it "assigns all client_fees as @client_fees" do
+  #     client_fee = ClientFee.create! valid_attributes
+  #     get :index, {}, valid_session
+  #     assigns(:client_fees).should eq([client_fee])
+  #   end
+  # end
 
   describe "GET show" do
     it "assigns the requested client_fee as @client_fee" do
@@ -75,9 +75,9 @@ describe ClientFeesController do
         assigns(:client_fee).should be_persisted
       end
 
-      it "redirects to the created client_fee" do
+      it "redirects to client_fee index" do
         post :create, {:client_fee => valid_attributes}, valid_session
-        response.should redirect_to(ClientFee.last)
+        response.should redirect_to(client_fees_url)
       end
     end
 
@@ -116,10 +116,10 @@ describe ClientFeesController do
         assigns(:client_fee).should eq(client_fee)
       end
 
-      it "redirects to the client_fee" do
+      it "redirects to the client_fee index" do
         client_fee = ClientFee.create! valid_attributes
         put :update, {:id => client_fee.to_param, :client_fee => valid_attributes}, valid_session
-        response.should redirect_to(client_fee)
+        response.should redirect_to(client_fees_url)
       end
     end
 

@@ -1,6 +1,5 @@
 class PlannedHoursController < ApplicationController
   before_action :set_planned_hour, only: [:show, :edit, :update, :destroy]
-  before_action :set_month_view
 
   # GET /planned_hours
   # GET /planned_hours.json
@@ -68,12 +67,6 @@ class PlannedHoursController < ApplicationController
       format.js
       format.html { redirect_to planned_hours_url }
       format.json { head :no_content }
-    end
-  end
-
-  def set_month_view
-    if session[:month_view] == nil
-      session[:month_view] = DateTime.new(Time.now.year, Time.now.month, 1, 0, 0, 0, "+00:00")
     end
   end
 

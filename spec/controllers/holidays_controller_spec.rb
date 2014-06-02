@@ -30,13 +30,15 @@ describe HolidaysController do
   # HolidaysController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all holidays as @holidays" do
-      holiday = Holiday.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:holidays).should eq([holiday])
-    end
-  end
+  # Not neccessary to assign all holidays to @holidays now that it depends on month
+
+  # describe "GET index" do
+  #   it "assigns all holidays as @holidays" do
+  #     holiday = Holiday.create! valid_attributes
+  #     get :index, {}, valid_session
+  #     assigns(:holidays).should eq([holiday])
+  #   end
+  # end
 
   describe "GET show" do
     it "assigns the requested holiday as @holiday" do
@@ -75,9 +77,9 @@ describe HolidaysController do
         assigns(:holiday).should be_persisted
       end
 
-      it "redirects to the created holiday" do
+      it "redirects to the holidays index" do
         post :create, {:holiday => valid_attributes}, valid_session
-        response.should redirect_to(Holiday.last)
+        response.should redirect_to(holidays_url)
       end
     end
 

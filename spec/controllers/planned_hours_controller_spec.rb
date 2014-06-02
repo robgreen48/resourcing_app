@@ -30,13 +30,13 @@ describe PlannedHoursController do
   # PlannedHoursController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all planned_hours as @planned_hours" do
-      planned_hour = PlannedHour.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:planned_hours).should eq([planned_hour])
-    end
-  end
+  # describe "GET index" do
+  #   it "assigns all planned_hours as @planned_hours" do
+  #     planned_hour = PlannedHour.create! valid_attributes
+  #     get :index, {}, valid_session
+  #     assigns(:planned_hours).should eq([planned_hour])
+  #   end
+  # end
 
   describe "GET show" do
     it "assigns the requested planned_hour as @planned_hour" do
@@ -75,10 +75,12 @@ describe PlannedHoursController do
         assigns(:planned_hour).should be_persisted
       end
 
-      it "redirects to the created planned_hour" do
-        post :create, {:planned_hour => valid_attributes}, valid_session
-        response.should redirect_to(PlannedHour.last)
-      end
+      # no redirect when new created as using js to re render
+
+      # it "redirects to the planned_hour index" do
+      #   post :create, {:planned_hour => valid_attributes}, valid_session
+      #   response.should redirect_to(planned_hours_url)
+      # end
     end
 
     describe "with invalid params" do

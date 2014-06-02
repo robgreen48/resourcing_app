@@ -1,5 +1,3 @@
-@import "bootstrap";
-
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
@@ -71,7 +69,7 @@ p {
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: 13px;
   font-weight: bold;
   line-height: 1;
   &:hover {
