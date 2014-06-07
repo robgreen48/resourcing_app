@@ -1,0 +1,34 @@
+<% provide(:title, 'Copy from last month') %>
+
+<%= render 'layouts/month_view_panel' %>
+
+<h1>Copy from last month</h1>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Hours</th>
+      <th>Client</th>
+      <th>Month</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @previous_months_hours.each do |previous_months_hour| %>
+
+        <tr>
+          <td><%= previous_months_hour.user.name %></td>
+          <td><%= previous_months_hour.number %></td>
+          <td><%= previous_months_hour.client.name %></td>
+          <td><%= previous_months_hour.month %></td>
+        </tr>
+      
+    <% end %>
+
+  </tbody>
+</table>
+
+
+<div style="clear:both"></div>

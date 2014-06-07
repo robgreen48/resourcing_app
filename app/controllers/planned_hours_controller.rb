@@ -50,6 +50,7 @@ class PlannedHoursController < ApplicationController
   def update
     respond_to do |format|
       if @planned_hour.update(planned_hour_params)
+        format.js
         format.html { redirect_to @planned_hour, notice: 'Planned hour was successfully updated.' }
         format.json { head :no_content }
       else
@@ -69,6 +70,24 @@ class PlannedHoursController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def copy_from_last_month
+    @view = session[:month_view]
+    last_month = @view-1.month
+    client_id = params[:client_id]
+    @previous_months_hours = PlannedHour.where(:month => last_month.beginning_of_day..last_month.end_of_day, :client_id => client_id)
+
+    #Create the new hours based on the previous month's hours
+
+    @previous_months_hours.each do |previous_months_hour|
+      new_hour = PlannedHour.new(:number => previous_months_hour.number, :client_id => previous_months_hour.client_id, :user_id => previous_months_hour.user_id, :month => previous_months_hour.month+1.month)
+      new_hour.save
+    end
+
+    redirect_to action: "index", notice: 'Planned hour was successfully created.'
+
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,0 +1,5 @@
+<% view = session[:month_view] %>
+<% @planned_hours = PlannedHour.where(:month => view.beginning_of_day..view.end_of_day) %>
+<% @client = Client.find(@planned_hour.client_id) %>
+$("#panel-info-<%= @planned_hour.client_id %>").html("<%= j render 'planned_hours_breakdown', :this_client => @planned_hour.client_id %>");
+$("#planned_hours_summary-<%= @planned_hour.client_id %>").text("<%= @client.name %>: <%= @client.total_planned_hours(view) %> hours planned, out of <%= @client.paid_for_hours(view).round %> paid for")

@@ -11,6 +11,10 @@
 	}
 }
 
+#month_view_buttons{
+	width:150px;
+}
+
 /* new hours form */
 
 .form-inline{
@@ -37,4 +41,14 @@
 		height: 27px;
 	}
 
+}
+
+
+#planned_hours_breakdown_table td{	
+	padding-top:10px;
+	vertical-align:middle;
+}
+
+#copy_last_month_button{
+	padding-right:150px;
 }

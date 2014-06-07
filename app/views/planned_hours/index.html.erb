@@ -15,7 +15,7 @@
       <h4 class="panel-title" id="planned_hours_heading">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= panel_num %>" id="planned_hours_summary-<%= client.id %>">
         <%= client.name %>: <%= client.total_planned_hours(@view) %> hours planned, out of <%= client.paid_for_hours(@view).round %> paid for
-        </a>
+        </a><span class="caret"></span>
       </h4>
     </div>
 
@@ -25,9 +25,10 @@
         <%= render 'planned_hours_breakdown', :this_client => client.id %>
 
       </div>
+      <div class="pull-right" id="copy_last_month_button"><p data-no-turbolink><%= link_to "Copy Last Month", copy_from_last_month_path(:client_id => client.id), :class => "btn btn-default", data: { confirm: 'Definitely copy last month?' } %></p></div>
 
       <%= render 'add_hours_form', :this_client => client.id  %>
-      
+
     </div>
   </div>
   <% panel_num = panel_num + 1 %>

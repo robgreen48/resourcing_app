@@ -19,6 +19,7 @@ ResourcingApp::Application.routes.draw do
   match '/pacing',   to: 'static_pages#pacing',   via: 'get'
   match '/decrement_month_view', to: 'static_pages#decrement_month_view', via: 'get'
   match '/increment_month_view', to: 'static_pages#increment_month_view', via: 'get'
+  match '/copy_from_last_month', to: 'planned_hours#copy_from_last_month', via: 'get'
 
   get "static_pages/home"
   get "static_pages/help"
